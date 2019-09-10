@@ -21,11 +21,13 @@ const Navbar = props => {
   );
 };
 
+// default props
 Navbar.defaultProps = {
   title: "Github Finder",
   icon: "fab fa-github"
 };
 
+// type checking for prop types.
 Navbar.propTypes = {
   title: PropTypes.string.isRequired,
   icon: PropTypes.string.isRequired
