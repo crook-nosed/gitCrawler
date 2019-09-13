@@ -1,15 +1,13 @@
-import React, { useEffect, Fragment } from "react";
+import React, { useEffect, Fragment, useContext } from "react";
 import Spinner from "../layout/Spinner";
 import Repos from "../repos/Repos";
-import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
+import GithubContext from "../../context/github/githubContext";
 
-const User = ({ user, getUser, getUserRepos, match, loading, repos }) => {
-  // In class based component we use componentDidMount lifecycle method to define what will happen just after the given component loads. To do the same with hooks in functional components we use useEffect as shown below
-  // componentDidMount() {
-  //   this.props.getUser(this.props.match.params.login);
-  //   this.props.getUserRepos(this.props.match.params.login);
-  // }
+const User = ({ match }) => {
+  const githubContext = useContext(GithubContext);
+
+  const { user, getUser, loading, repos, getUserRepos } = githubContext;
 
   // use effect takes two arguments, one is the function and other is the array which contains the dependencies for what are contained in the useEffect(not sure about that though!)
   useEffect(() => {
@@ -104,14 +102,6 @@ const User = ({ user, getUser, getUserRepos, match, loading, repos }) => {
       <Repos repos={repos} />
     </Fragment>
   );
-};
-
-User.propTypes = {
-  loading: PropTypes.bool,
-  user: PropTypes.object.isRequired,
-  repos: PropTypes.array.isRequired,
-  getUser: PropTypes.func.isRequired,
-  getUserRepos: PropTypes.func.isRequired
 };
 
 export default User;
